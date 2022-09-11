@@ -13,10 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CasinoIcon from '@mui/icons-material/Casino';
-const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
-const settings = ['Profile',  'Logout'];
+import {NavLink} from "react-router-dom";
+import StyledLink from "./StyledLink";
 
-const ResponsiveAppBar = () => {
+const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
+const settings = ['Profile' , 'Logout'];
+
+const AdminAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -113,16 +116,23 @@ const ResponsiveAppBar = () => {
                     >
                         LOGO
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
+                    <Box sx={{ flexGrow: 1,   }}>
+                        <Toolbar>
+
+                            <StyledLink to='/users'>
+                                <Button color="inherit">Users</Button>
+                            </StyledLink>
+                            <StyledLink to='/bookings'>
+                                <Button color="inherit">Bookings</Button>
+                            </StyledLink>
+                            <StyledLink to='/chat'>
+                                <Button color="inherit">Chat</Button>
+                            </StyledLink>
+                          
+                            
+                            
+                       
+                        </Toolbar>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -147,11 +157,11 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            
+                                    <a class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" href="hhhh">Profile</a>
+                            <a className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+                               href="hhhh">Logout</a>
+
                         </Menu>
                     </Box>
                 </Toolbar>
@@ -159,4 +169,4 @@ const ResponsiveAppBar = () => {
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
+export default AdminAppBar;
