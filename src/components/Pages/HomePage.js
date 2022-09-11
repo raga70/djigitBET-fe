@@ -3,7 +3,7 @@
 function SlotsPage(props) {
     return (
         <div className="slots">
-            <h2>SLOTSMASHINKA</h2>
+            <h2>HomePage</h2>
         </div>
     );
 }

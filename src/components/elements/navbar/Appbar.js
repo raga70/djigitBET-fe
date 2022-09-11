@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CasinoIcon from '@mui/icons-material/Casino';
 import StyledLink from "./StyledLink";
+import {Navigate, NavLink} from "react-router-dom";
 
 const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
 const settings = ['Profile' , 'Logout'];
@@ -158,8 +159,9 @@ const ResponsiveAppBar = () => {
                         >
                             
                                     <a class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" href="hhhh">Profile</a>
-                            <a className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
-                               href="hhhh">Logout</a>
+                            
+                            <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/register'}>Register</NavLink>
+                            <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/login'}>Login</NavLink>
 
                         </Menu>
                     </Box>

@@ -1,11 +1,12 @@
 ﻿import React from 'react';
-import Demo from "./slotMachine";
+
+import SlotMachine from "../../elements/slotengine";
 
 function SlotsPage(props) {
     return (
         <div className="slots">
             <h2>SLOTSMASHINKA</h2>
-            
+            <SlotMachine/>
         </div>
     );
 }
