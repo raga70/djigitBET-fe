@@ -15,7 +15,7 @@ const StyledTable = styled(Table)`
     margin: 0 auto;
   //  margin-left: -10% !important;
 `;
-
+//TODO: update the users array to reflect changes done when a users is edited and deleted aka on delete remove by id on update change data
 const THead = styled(TableRow)`
     & > th {
 
@@ -71,7 +71,9 @@ const AllUsers = () => {
 
     const deleteUserData = async (id) => {
         await deleteUser(id);
-        getAllUsers();
+        
+        setUsers(users.filter((user) => user.userID !== id)); //lol what a fucked up way to delete an element from an array in js ()
+       // getAllUsers();
     }
 
    
@@ -171,7 +173,7 @@ const AllUsers = () => {
             </TableBody>
     
             
-            <EditUser passedUser={selUserEdit} modalOpen={modalOpen}  setModalOpen={setModalOpen} />
+            <EditUser passedUser={selUserEdit} modalOpen={modalOpen}  setModalOpen={setModalOpen} UsersArr={users} setUsersArr={setUsers} />
             
         </StyledTable>     
             

@@ -76,7 +76,11 @@ const EditUser = (props) => {
     }
 
     const editUserDetails = async() => {
-        const response = await editUser(id, user);
+        const response = await editUser(user.userID, user);
+
+        var usertobeEditedINDEX = props.UsersArr.findIndex(x=>x.userID === user.userID);
+        props.setUsersArr(props.UsersArr.splice(usertobeEditedINDEX, 1, user));        
+       //TODO: ASK professor why it works only some times
         handleClose();
         console.log(user);
     }

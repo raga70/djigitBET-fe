@@ -1,8 +1,11 @@
 ﻿{
   "compilerOptions": {
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "no-undef": "warn",
+    "no-unused-vars": "warn",
     // ... rest
-    "jsx": "react"
+   // "jsx": "react"
   }
 }
