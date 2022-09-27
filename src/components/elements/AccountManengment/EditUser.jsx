@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 
 import {FormGroup, FormControl, InputLabel, Input, Button, styled, Typography, Modal} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getUsers, editUser } from './api';
+import {getUsers, editUser, getUser} from './api';
 import allUsers from "./AllUsers";
 import Box from "@mui/material/Box";
+import {useStoreState} from "../../../security/persistenceAuthProvider";
 
 const initialValue = {
     name: '',
@@ -46,7 +47,8 @@ const style = {
 const EditUser = (props) => {
     //not using a hook here because we want to preserve only a reference var  from the parent component
     var open = props.modalOpen;
-    
+    let Bearer = useStoreState('authToken');
+
     function handleClose() {
         props.setModalOpen(false);
     }
@@ -66,17 +68,17 @@ const EditUser = (props) => {
     
     let navigate = useNavigate();
 
-    useEffect(() => {
-        loadUserDetails();
-    }, []);
-
-    const loadUserDetails = async() => {
-        const response = await getUsers(id);
-        setUser(response.data);
-    }
+    // useEffect(() => {
+    //     loadUserDetails();
+    // }, []);
+    //
+    // const loadUserDetails = async() => {
+    //     let response = await getUser(Bearer,id);
+    //     setUser(response.data);
+    // }
 
     const editUserDetails = async() => {
-        const response = await editUser(user.userID, user);
+        const response = await editUser(Bearer,user.userID, user);
 
         var usertobeEditedINDEX = props.UsersArr.findIndex(x=>x.userID === user.userID);
         props.setUsersArr(props.UsersArr.splice(usertobeEditedINDEX, 1, user));        
@@ -149,12 +151,12 @@ const EditUser = (props) => {
                    </FormControl>
                </Box>
            </Modal>
-                   
-                   
-                   
-                   
        </div>
     )
 }
-
 export default EditUser;
+                   
+                   
+                   
+                   
+

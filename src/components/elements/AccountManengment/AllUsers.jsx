@@ -2,26 +2,30 @@ import { useState, useEffect } from 'react';
 
 import {Table, TableHead, TableCell, TableRow, TableBody, Button, styled, Paper} from '@mui/material'
 import { getUsers, deleteUser } from './api';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Container from "@mui/material/Container";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import EditUser from "./EditUser";
+import {useStoreState} from "../../../security/persistenceAuthProvider";
+import axios from "axios";
+import {axiosAuthConfig, AxoisAuthConfig, BaseUrl} from "../../../app.properties";
+import {GlobalLogout} from "../../../security/persistenceLogOut";
 
 const StyledTable = styled(Table)`
     width: 100%;
     margin: 0 auto;
   //  margin-left: -10% !important;
 `;
-//TODO: update the users array to reflect changes done when a users is edited and deleted aka on delete remove by id on update change data
+
 const THead = styled(TableRow)`
     & > th {
 
         font-size: 20px;
-        background: #000000;
-        color: #FFFFFF;
+        background: #FFFFFF;
+        color: #1976d2;
     }
 `;
 
@@ -31,7 +35,7 @@ const TRow = styled(TableRow)`
     }
 `;
 
-
+//Master component
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
     const [inputVal, setInputVal] = useState("")
@@ -39,84 +43,64 @@ const AllUsers = () => {
 
     const[selUserEdit, setSelUserEdit] = useState([]);
     const[modalOpen, setModalOpen] = useState(false);
-
+    let Bearer = useStoreState('authToken');
+    const navigate = useNavigate();
     
     
     
     
     const getAllUsers = async () => {
-        console.log("the asyn function is called")
-        let response = await getUsers();
-        setUsers(response.data);
-        setFiltered(response.data);
-        console.log("in async the data returned")
-        console.log(response.data);
+       try {
+           var response= await getUsers(Bearer)
+           if (response.status === 401) {
+               GlobalLogout();
+               navigate('/login');
+           }
+           setUsers(response.data);
+           setFiltered(response.data);
+         } catch (e) {console.error('Component:AllUsers.jsx , method getAll -- error with axion when gettingAllUsers', e);}
+       }
+        
 
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    let brUseEfect = 0;
     useEffect(() => {
         if ( users.length != 0) return;
-        getAllUsers()
-       console.log("getALLUsers was called")
-        
+        if (brUseEfect > 0) return;
+        getAllUsers();
+     
+        brUseEfect++; //ignore unnecessary useEffect calls
     }, []);
 
     const deleteUserData = async (id) => {
-        await deleteUser(id);
+        await deleteUser(Bearer,id);
         
         setUsers(users.filter((user) => user.userID !== id)); //lol what a fucked up way to delete an element from an array in js ()
-       // getAllUsers();
     }
-
-   
-
-
-
-
-
-   
-
-
-
-  
+    
 
     const changeInputVal = (e) => {
         e.preventDefault()
-
-        console.log("Input value: ", inputVal)
         setInputVal(e.currentTarget.value)
     }
 
+    
     useEffect( () => {
-        console.log("the filter`s use effect was called")
         if ( users.length === 0) return;
-        if (!inputVal ) {
-            setFiltered(users)
-
-            return
+        if (!inputVal ) 
+        {
+            setFiltered(users);
+            return;
         }
-
-
         const filteredData = users.filter(o => Object.keys(o).some(k => String(o[k]).toLowerCase().includes(inputVal.toLowerCase())))
         setFiltered(filteredData)
-    }, [inputVal])
+    }, [inputVal]) 
+
     
   
     
 
     return (
-
-   
-            
-        <div>
+        <>
             <Paper elevation={3} sx={{padding: '10px 10px', width:600, margin:'20px auto'}}>
                 <FindInPageIcon fontSize={"large"} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,  }}/>
                 <Box
@@ -171,22 +155,11 @@ const AllUsers = () => {
                 
                 }
             </TableBody>
-    
-            
             <EditUser passedUser={selUserEdit} modalOpen={modalOpen}  setModalOpen={setModalOpen} UsersArr={users} setUsersArr={setUsers} />
-            
         </StyledTable>     
-            
-            
-            
-            
-            
-            
-            
-            
-        </div>
+        </>
 
     )
 }
-
+            
 export default AllUsers;

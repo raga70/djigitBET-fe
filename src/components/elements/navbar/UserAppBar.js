@@ -13,14 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CasinoIcon from '@mui/icons-material/Casino';
-import StyledLink from "./StyledLink";
+import StyledLink from "./elements/StyledLink";
 import {Navigate, NavLink} from "react-router-dom";
-import LogInOutSwitcher from "./LogInOutSwitcher";
+import LogInOutSwitcher from "./elements/LogInOutSwitcher";
 
 const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
 const settings = ['Profile' , 'Logout'];
 
-const ResponsiveAppBar = () => {
+const UserAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -167,4 +167,4 @@ const ResponsiveAppBar = () => {
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
+export default UserAppBar;

@@ -5,7 +5,8 @@ import Container from "@mui/material/Container";
 import {Paper} from "@mui/material";
 import FindInPageIcon from '@mui/icons-material/FindInPage';
 import AllUsers from "../../elements/AccountManengment/AllUsers";
-import {useGlobalState} from "../../../security/AuthProvider";
+//import {useGlobalState} from "../../../security/AuthProvider";
+import {useStoreState} from "../../../security/persistenceAuthProvider";
 import {useNavigate} from "react-router-dom";
 import HomePage from "../HomePage";
 
@@ -14,7 +15,7 @@ import HomePage from "../HomePage";
   
 export default function UsersManengmentPage() {
     const navigate = useNavigate();
- if (useGlobalState('AuthRole')[0] === "ADMIN") {
+ if (useStoreState('authRole') === "ADMIN") {
   return (
 
       <div>

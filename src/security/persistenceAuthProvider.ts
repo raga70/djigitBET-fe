@@ -3,6 +3,8 @@ import { applyMiddleware } from 'redux';
 
 import { createStore } from 'react-hooks-global-state';
 
+
+
 type State = {
     authToken: string;
     authRole: string;
@@ -26,8 +28,8 @@ const parseState = (str: string | null): State | null => {
     try {
         const state = JSON.parse(str || '');
         if (typeof state.user !== 'object') throw new Error();
-        if (typeof state.authToken.age !== 'string') throw new Error();
-        if (typeof state.authRole.firstName !== 'string') throw new Error();
+        if (typeof state.authToken !== 'string') throw new Error();
+        if (typeof state.authRole !== 'string') throw new Error();
        
         return state as State;
     } catch (e) {
@@ -41,7 +43,7 @@ const reducer = (state = initialState, action: Action) => {
     switch (action.type) {
         case 'setAuthToken': return {
             ...state,
-            AuthToken: action.authToken
+            authToken: action.authToken
         };
         case 'setAuthRole': return {
             ...state,

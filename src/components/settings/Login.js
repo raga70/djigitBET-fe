@@ -4,11 +4,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {NavLink, useNavigate} from "react-router-dom";
-//import AuthManager from "../../security/AuthProvider";
 import axios from 'axios';
 import {BaseUrl, LoginUrl} from "../../app.properties";
-import {setGlobalState} from "../../security/AuthProvider";
-//import {Navigate} from "react-router-dom";
+import {dispatch, useStoreState} from "../../security/persistenceAuthProvider";
+import {setGlobalState} from "../../security/persistenceLogOut";
+
+
+
 
 function showForgotPass() {
     let y = document.getElementsByClassName('hdn');
@@ -26,7 +28,7 @@ const Login=()=>{
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
-   // const {AuthProvider,setAuthPrivder} = AuthManager()
+
     
     const paperStyle={padding :20,height:'70vh',width:380, margin:"20px auto"}
     const avatarStyle={backgroundColor:'#1bbd7e'}
@@ -42,11 +44,25 @@ var role ;
         
         try {
             const response = await axios.post(`${BaseUrl}${LoginUrl}`, {username, password  }).then((response) => {
-                 accessToken = response.headers?.authorization ;  //TODO: remove Barier from token in backend
+                 accessToken = response.headers?.authorization ;  
                  role = response.headers?.role;
-                    setGlobalState('AuthToken', accessToken);
-                    setGlobalState('AuthRole', role);
-                    setGlobalState('User', response.data);
+
+                    dispatch({
+                        authToken: response.headers?.authorization,
+                        type: 'setAuthToken',
+                    });
+                    dispatch({
+                        authRole: response.headers?.role,
+                        type: 'setAuthRole',
+                    });
+                    dispatch({
+                        user: response.data,
+                        type: 'setUser',
+                    });
+                   
+                    // setGlobalState('AuthToken', accessToken);
+                    // setGlobalState('AuthRole', role);
+                    // setGlobalState('User', response.data);
                    if (response.status === 200) {
                     navigate('/');
                 }else if (response.status === 400) {

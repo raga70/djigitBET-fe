@@ -7,6 +7,12 @@ import {useState} from "react";
 import Checkbox from '@mui/material/Checkbox';
 import {red} from "@mui/material/colors";
 const Signup = () => {
+
+    const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
+    const headerStyle = { margin: 0 }
+    const avatarStyle = { backgroundColor: '#1bbd7e' }
+    const marginTop = { marginTop: 5 }
+    
     const type = "PLAYER";
     const [username,setUsername]= useState('');
     const [email, setEmail] = useState('');
@@ -16,6 +22,7 @@ const Signup = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password !== password2) {
@@ -23,7 +30,7 @@ const Signup = () => {
             y[0].style.display = 'block';
         }else{
         const player = {type, name, surname, nationalIDNumber, email, phoneNumber, username, password};
-            
+            //TODO: Replace with axios Register
         fetch ("http://localhost:8080/user/save",{
             method : "POST",
             headers : { "Content-Type" : "application/json" } ,
@@ -33,10 +40,7 @@ const Signup = () => {
     }}
     
     
-    const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
-    const headerStyle = { margin: 0 }
-    const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const marginTop = { marginTop: 5 }
+   
     return (
         <Grid>
             <br/>

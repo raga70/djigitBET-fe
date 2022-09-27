@@ -1,15 +1,16 @@
-﻿import {useGlobalState} from "../../../security/AuthProvider";
+﻿//import {useGlobalState} from "../../../security/AuthProvider";
+import {useStoreState} from "../../../../security/persistenceAuthProvider";
 import {NavLink} from "react-router-dom";
 import * as React from "react";
-import {GlobalLogout } from "../../../security/AuthProvider";
+import {GlobalLogout } from "../../../../security/persistenceLogOut";
 
 
 
 
 
  const LogInOutSwitcher = () => {
-     var a = 0
-    if (useGlobalState('AuthToken')[0] === "") { //TODO: fix this
+   
+    if (useStoreState('authToken') === "") { 
         return (
             <>
             <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/login'}>Login</NavLink>
@@ -20,7 +21,7 @@ import {GlobalLogout } from "../../../security/AuthProvider";
         return (
             <>
             <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/Profile'}>Profile</NavLink>
-             <a class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" onClick={GlobalLogout}>Logout</a>
+             <a className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" onClick={GlobalLogout}>Logout</a>
             </>
                 )
     }

@@ -1,18 +1,19 @@
 ﻿
 import AdminAppBar from "./AdminAppbar";
-import ResponsiveAppBar from "./Appbar";
-import {useGlobalState} from "../../../security/AuthProvider";
-//import { createGlobalState } from 'react-hooks-global-state';
+import UserAppBar from "./UserAppBar";
+//import {useGlobalState} from "../../../security/AuthProvider";
+import {useStoreState} from "../../../security/persistenceAuthProvider";
+
 export default function NavBar() {
    
-    
-    if (useGlobalState('AuthRole')[0] === "ADMIN") {
+    var usrStt = useStoreState('authRole')
+    if (useStoreState('authRole') === "ADMIN") {
         return (
       
            
              <AdminAppBar/>
         )
     } else {
-        return( <ResponsiveAppBar/>)
+        return( <UserAppBar/>)
     }
 }

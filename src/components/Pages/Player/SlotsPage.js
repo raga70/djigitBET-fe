@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import SlotMachine from "../../elements/slotengine";
+import SlotMachine from "../../elements/SlotMachine/slotengine";
 
 function SlotsPage(props) {
     return (

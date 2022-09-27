@@ -14,8 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CasinoIcon from '@mui/icons-material/Casino';
 import {NavLink} from "react-router-dom";
-import StyledLink from "./StyledLink";
-import LogInOutSwitcher from "./LogInOutSwitcher";
+import StyledLink from "./elements/StyledLink";
+import LogInOutSwitcher from "./elements/LogInOutSwitcher";
 
 const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
 const settings = ['Profile' , 'Logout'];
@@ -159,7 +159,6 @@ const AdminAppBar = () => {
                             onClose={handleCloseUserMenu}
                         >
                             
-                                    <a class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" href="hhhh">Profile</a>
                                      <LogInOutSwitcher/>
 
                         </Menu>
