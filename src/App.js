@@ -7,10 +7,11 @@ import UsersManagementPage from "./components/Pages/Admin/UsersManengmentPage";
 import Signup from "./components/settings/register";
 import Login from "./components/settings/Login";
 import NavBar from "./components/elements/navbar/NavBarMaster";
+import Profile from "./components/Pages/Profile";
 function App() {
   return (
 
-    <Router>
+        <Router>
     <div className="App">
        
        
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/slots"  element={<SlotsPage/>}/>
             <Route exact path="/register" element={<Signup/>}/>
             <Route exact path="/login" element={<Login/>}/>
+            <Route exact path="/profile" element={<Profile/>}/>
             
         </Switch>
       

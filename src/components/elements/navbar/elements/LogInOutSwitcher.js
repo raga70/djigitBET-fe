@@ -20,7 +20,7 @@ import {GlobalLogout } from "../../../../security/persistenceLogOut";
     }else {
         return (
             <>
-            <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/Profile'}>Profile</NavLink>
+            <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/profile'}>Profile</NavLink>
              <a className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" onClick={GlobalLogout}>Logout</a>
             </>
                 )

@@ -4,9 +4,11 @@ import {createGlobalState} from "react-hooks-global-state";
 
 export  const BaseUrl = 'http://localhost:8080';
 
-export const LoginUrl = '/authenticate/login';
+export const LoginUrl = BaseUrl + '/authenticate/login';
+export const RegisterUrl = BaseUrl + '/authenticate/register';
 
-
+export const UsersUrl = BaseUrl + '/user';
+export const UnprivilegedUserUrl = BaseUrl + '/unpriviligeduser/';
 export function axiosAuthConfig(Bearer) {
    if (Bearer === undefined || Bearer === null|| Bearer === "") {throw new Error('Bearer token wasnt passed to axios config creator');}
    

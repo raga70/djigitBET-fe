@@ -144,7 +144,7 @@ const AllUsers = () => {
                                 <TableCell>{user.nationalIDNumber}</TableCell>
                                 <TableCell>
                                     <Button color="primary" variant="contained" style={{marginRight:10, marginBottom:9}} onClick={()=>{setSelUserEdit(user); setModalOpen(true)}}  >Edit</Button>
-                                    <Button color="secondary" variant="contained" onClick={() => deleteUserData(user.id)}>Delete</Button>
+                                    <Button color="secondary" variant="contained" onClick={() => deleteUserData(user.userID)}>Delete</Button>
                                 </TableCell>
                             </TRow>
                         )}

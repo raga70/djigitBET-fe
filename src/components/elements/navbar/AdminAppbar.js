@@ -123,8 +123,8 @@ const AdminAppBar = () => {
                             <StyledLink to='/users'>
                                 <Button color="inherit">Users</Button>
                             </StyledLink>
-                            <StyledLink to='/bookings'>
-                                <Button color="inherit">Bookings</Button>
+                            <StyledLink to='/statistics'>
+                                <Button color="inherit">Staistics</Button>
                             </StyledLink>
                             <StyledLink to='/chat'>
                                 <Button color="inherit">Chat</Button>

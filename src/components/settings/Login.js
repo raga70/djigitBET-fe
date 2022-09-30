@@ -1,9 +1,9 @@
-﻿import React, {useContext, useState} from 'react'
+﻿import React, {useContext, useEffect, useState} from 'react'
 import {Grid, Paper, Avatar, TextField, Button, Typography, Link, Hidden} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {BaseUrl, LoginUrl} from "../../app.properties";
 import {dispatch, useStoreState} from "../../security/persistenceAuthProvider";
@@ -21,9 +21,7 @@ function showForgotPass() {
 
 
 const Login=()=>{
-
- 
-  
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
@@ -43,7 +41,7 @@ var role ;
         e.preventDefault();
         
         try {
-            const response = await axios.post(`${BaseUrl}${LoginUrl}`, {username, password  }).then((response) => {
+            const response = await axios.post(`${LoginUrl}`, {username, password  }).then((response) => {
                  accessToken = response.headers?.authorization ;  
                  role = response.headers?.role;
 
@@ -60,34 +58,37 @@ var role ;
                         type: 'setUser',
                     });
                    
-                    // setGlobalState('AuthToken', accessToken);
-                    // setGlobalState('AuthRole', role);
-                    // setGlobalState('User', response.data);
                    if (response.status === 200) {
                     navigate('/');
-                }else if (response.status === 400) {
-                    setErrMsg('Invalid username or/and password');
-                }else if (response.status === 401) {
-                    setErrMsg('Unauthorized');
                 }
-                   
+                 
             }
             
             );
-          
-          //  console.log(JSON.stringify(response?.data)); //remove
          
             setUsername('');
             setPassword('');
             
-        } catch (err) {
-            console.log(err);
-            
-           // errRef.current.focus();
+        } catch (e) {
+            if (e.response.status === 400 || e.response.status === 0) {
+                setErrMsg('Invalid username or/and password');
+            } else if (e.response.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {console.log(err);
+                setErrMsg('Something went wrong');
+            }
         }
+           
+           
+          
+        
     }
-    
-    
+
+
+    useEffect(() => {
+        setErrMsg('') ;
+        
+    }, [username, password])
     
     
     
@@ -110,15 +111,7 @@ var role ;
                 <br/>
                 <TextField label='Password' onChange={(e) => setPassword(e.target.value)}
                            value={password} placeholder='Enter password' type='password' fullWidth required/>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Remember me"
-                />
+                
                 <Button type='submit' onClick={handleSubmit} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
                 <Typography >
                     <Button onClick={showForgotPass} >

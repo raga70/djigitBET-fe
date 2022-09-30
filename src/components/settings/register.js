@@ -6,8 +6,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import {useState} from "react";
 import Checkbox from '@mui/material/Checkbox';
 import {red} from "@mui/material/colors";
+import axios from "axios";
+import {axiosAuthConfig, LoginUrl, RegisterUrl, UsersUrl} from "../../app.properties";
+import {dispatch} from "../../security/persistenceAuthProvider";
+import {useNavigate} from "react-router-dom";
 const Signup = () => {
 
+    const navigate =  useNavigate()    
     const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -23,7 +28,7 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
    
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== password2) {
             let y = document.getElementsByClassName('passmsm');
@@ -31,15 +36,58 @@ const Signup = () => {
         }else{
         const player = {type, name, surname, nationalIDNumber, email, phoneNumber, username, password};
             //TODO: Replace with axios Register
-        fetch ("http://localhost:8080/user/save",{
-            method : "POST",
-            headers : { "Content-Type" : "application/json" } ,
-            body : JSON.stringify ( player )}).then(() => {
-            console.log(JSON.stringify(player));
-        })
-    }}
+
+            
+                try {
+                   await  axios.post(`${RegisterUrl}`, player)
+                }
+                catch (e) {console.error('error in Registering user ULTRA', e);}
+                 try {
+                    
+                     let  response = await axios.post(`${LoginUrl}`, {username, password  })
+                         
+                         let accessToken = response.headers?.authorization ;
+                         let role = response.headers?.role;
+                         
+                         dispatch({
+                             authToken: response.headers?.authorization,
+                             type: 'setAuthToken',
+                         });
+                         dispatch({
+                             authRole: response.headers?.role,
+                             type: 'setAuthRole',
+                         });
+                         dispatch({
+                             user: response.data,
+                             type: 'setUser',
+                         });
+
+                         if (response.status === 200) {
+                             navigate('/');
+                         }
+
+                     
+                     player.password = null;
+                     navigate('/');
+                 }  catch (e) {console.error('error in auto logging in the  user after registration ULTRA', e);}
+                        
+                        
+                                       
+                    
+            }
+            
+            
+            
+    }
     
-    
+        
+
+
+
+
+
+
+
    
     return (
         <Grid>
@@ -54,30 +102,30 @@ const Signup = () => {
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                 </Grid>
                 <form>
-                    <TextField fullWidth label='Username' placeholder="Enter your new username" value={username} onChange={(e)=>setUsername(e.target.value)} />
+                    <TextField fullWidth label='Username' required={true} placeholder="Enter your new username" value={username} onChange={(e)=>setUsername(e.target.value)} />
                     <br/>
                     <br/>
-                    <TextField fullWidth label='Email' placeholder="Enter your email"  value={email} onChange={(e)=>setEmail(e.target.value)} />
+                    <TextField fullWidth label='Email' type={"email"} required={true} placeholder="Enter your email"  value={email} onChange={(e)=>setEmail(e.target.value)} />
                     <br/>
                     <br/>
-                    <TextField fullWidth label='Name' placeholder="Enter your name" value={name} onChange={(e)=>setName(e.target.value)} />
+                    <TextField fullWidth label='Name' required={true} placeholder="Enter your name" value={name} onChange={(e)=>setName(e.target.value)} />
                     <br/>
                     <br/>
-                    <TextField fullWidth label='Surname' placeholder="Enter your surname" value={surname} onChange={(e)=>setSurname(e.target.value)} />
+                    <TextField fullWidth label='Surname' required={true} placeholder="Enter your surname" value={surname} onChange={(e)=>setSurname(e.target.value)} />
                     <br/>
                     <br/>
-                    <TextField fullWidth label='NationalIDNumber' placeholder="Enter your national id card number" value={nationalIDNumber} onChange={(e)=>setNationalIDNumber(e.target.value)} />
+                    <TextField fullWidth label='NationalIDNumber' required={true} placeholder="Enter your national id card number" value={nationalIDNumber} onChange={(e)=>setNationalIDNumber(e.target.value)} />
                     <br/>
                     <br/>
-                    <TextField fullWidth label='Phone Number' placeholder="Enter your phone number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} />
+                    <TextField fullWidth label='Phone Number' required={true} placeholder="Enter your phone number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} />
                     <br/>
                     <br/>
                     <br/>
                     
-                    <TextField fullWidth label='Password' placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                    <TextField fullWidth label='Password' required={true} placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)} />
                     <br/>
                     <br/>
-                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" value={password2} onChange={(e)=>setPassword2(e.target.value)} />
+                    <TextField fullWidth label='Confirm Password' required={true} placeholder="Confirm your password" value={password2} onChange={(e)=>setPassword2(e.target.value)} />
                     <div className={"passmsm"} style={{display:"none"}}>
                         <p style={{color:"red"}}>Passwords do not match</p>
                     </div>
