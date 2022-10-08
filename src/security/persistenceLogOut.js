@@ -1,5 +1,6 @@
 ﻿
 import {dispatch} from "./persistenceAuthProvider";
+import {Navigate} from "react-router-dom";
 
 export const GlobalLogout = () => {
 
@@ -15,4 +16,5 @@ export const GlobalLogout = () => {
         user: {},
         type: 'setUser',
     });
+    
 }

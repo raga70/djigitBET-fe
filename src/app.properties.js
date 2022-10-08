@@ -9,6 +9,8 @@ export const RegisterUrl = BaseUrl + '/authenticate/register';
 
 export const UsersUrl = BaseUrl + '/user';
 export const UnprivilegedUserUrl = BaseUrl + '/unpriviligeduser/';
+export const slotsUrl = BaseUrl + '/slots';
+
 export function axiosAuthConfig(Bearer) {
    if (Bearer === undefined || Bearer === null|| Bearer === "") {throw new Error('Bearer token wasnt passed to axios config creator');}
    

@@ -16,6 +16,8 @@ import CasinoIcon from '@mui/icons-material/Casino';
 import StyledLink from "./elements/StyledLink";
 import {Navigate, NavLink} from "react-router-dom";
 import LogInOutSwitcher from "./elements/LogInOutSwitcher";
+import PlayerResponceDTO from "../../DTO/PlayerResponceDTO";
+import {useStoreState} from "../../../security/persistenceAuthProvider";
 
 const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
 const settings = ['Profile' , 'Logout'];
@@ -23,7 +25,8 @@ const settings = ['Profile' , 'Logout'];
 const UserAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    let UserFromLocalst : PlayerResponceDTO = useStoreState('user');
+    
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -98,7 +101,7 @@ const UserAppBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <CasinoIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -115,7 +118,7 @@ const UserAppBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        djigitBET
                     </Typography>
                     <Box sx={{ flexGrow: 1 }}>
                         <Toolbar>
@@ -139,7 +142,7 @@ const UserAppBar = () => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt={UserFromLocalst.name} src="/static/images/avatar/2.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu

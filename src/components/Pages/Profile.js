@@ -57,21 +57,21 @@ export  const Profile = () => {
     
     
     
-    //update balance and winCoefficient in to local storage
-    let br = 0;
-    useEffect(() => {
-        
-        if (br ===0){
-            getSanitizedUser(Bearer,UserFromLocalst).then((response) => {
-                dispatch({
-                    user: response.data,
-                    type: 'setUser', 
-                });
-                
-            })
-        }
-        br++;
-    }, []);
+    //update balance and winCoefficient in to local storage //TODO: RETURN IF NEEDED
+    // let br = 0;
+    // useEffect(() => {
+    //    
+    //     if (br ===0){
+    //         getSanitizedUser(Bearer,UserFromLocalst).then((response) => {
+    //             dispatch({
+    //                 user: response.data,
+    //                 type: 'setUser', 
+    //             });
+    //            
+    //         })
+    //     }
+    //     br++;
+    // }, []);  
     
         
     

@@ -114,7 +114,8 @@
   "babel": {
     "plugins": [],
     "presets": [
-      "react-app"
+      "@babel/preset-react",
+      "@babel/preset-env"
     ]
   },
   "browserslist": {
