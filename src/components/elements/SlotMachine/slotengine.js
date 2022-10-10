@@ -2,13 +2,10 @@
 
 import React, {useState, useEffect} from 'react'
 import {LocalGasStation, OilBarrel, Savings} from "@mui/icons-material";
-import {generateNumbers} from "./api";
+import {generateNumbers, getJackpot} from "./api";
 import {dispatch, useStoreState} from "../../../security/persistenceAuthProvider";
 import {SlotCalculationsDTO} from "../../DTO/SlotCalculationsDTO";
 import {useNavigate} from "react-router-dom";
-import userResponceDTO from "../../DTO/UserResponceDTO";
-import PlayerResponceDTO from "../../DTO/PlayerResponceDTO";
-
 
 
 const SlotMachine = ({id, owned, close, expires}) => {
@@ -26,11 +23,23 @@ const SlotMachine = ({id, owned, close, expires}) => {
     const [balance, setBalance] = useState(player.balance)
     const [errorMsg, SetErrorMsg] = useState("")
 
+
+    
+
+    useEffect(() => {
+        getJackpot().then((data) => {
+            setJackpot(data)
+        })
+    }, [])
+    
+    
+    
     useEffect(() => {
         win()
     }, [ring3])
 
-
+ 
+    
     function row1() {
 
         if (!spin) {
@@ -237,29 +246,10 @@ const SlotMachine = ({id, owned, close, expires}) => {
             )
         }
     }
-    //
-    // function win() {
-    //     if (ring1 <= 50 && ring2 <= 50 && ring3 <= 50 && ring1 != undefined) {
-    //         setPrice(1)
-    //     } else if (ring1 > 50 && ring1 <= 75 && ring2 > 50 && ring2 <= 75 && ring3 > 50 && ring3 <= 75 && ring1 != undefined) {
-    //         setPrice(2)
-    //     } else if (ring1 > 75 && ring1 <= 95 && ring2 > 75 && ring2 <= 95 && ring3 > 75 && ring3 <= 95 && ring1 != undefined) {
-    //         setPrice(3)
-    //     } else if (ring1 > 95 && ring1 <= 100 && ring2 > 95 && ring2 <= 100 && ring3 > 95 && ring3 <= 100 && ring1 != undefined) {
-    //         setPrice(4)
-    //     } else {
-    //         setPrice(0)
-    //     }
-    // }
-
-    // function rand() {
-    //     setRing1(Math.floor(Math.random() * (100 - 1) + 1))
-    //     setTimeout(function(){setRing2(Math.floor(Math.random() * (100 - 1) + 1))}, 250)
-    //     setTimeout(function(){setRing3(Math.floor(Math.random() * (100 - 1) + 1))}, 750)
-    // }
 
 
-    async function rand() {     //fetch
+
+    async function getAlgoResults() {     //fetch
          let response = await generateNumbers(betAmount,Bearer)
             if (response.status !== 200) {
                 setRing1(10)
@@ -272,10 +262,10 @@ const SlotMachine = ({id, owned, close, expires}) => {
             
             let data : SlotCalculationsDTO =  response.data;
             setRing1(data.ring1)
-            setRing2(data.ring2)
-            setRing3(data.ring3)
-             // setTimeout(function(){setRing2(data.ring2)}, 250)
-             // setTimeout(function(){setRing3(data.ring3)}, 750)
+            setRing2(undefined)
+            setRing3(undefined)
+             setTimeout(function(){setRing2(data.ring2)}, 250)
+              setTimeout(function(){setRing3(data.ring3)}, 450)
             setJackpot(data.jackpot);
             setBalance(data.balance);
             player.balance = data.balance;
@@ -300,7 +290,7 @@ const SlotMachine = ({id, owned, close, expires}) => {
                 // setBalance(balance - betAmount)
                 // setJackpot(jackpot + (betAmount / 2))
                 setTimeout(async function(){
-                    await rand()
+                    await getAlgoResults()
                 }, 1000)
             } else {
                 setPrice(10)

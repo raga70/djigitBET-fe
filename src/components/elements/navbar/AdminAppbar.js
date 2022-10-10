@@ -128,8 +128,8 @@ const AdminAppBar = () => {
                             <StyledLink to='/users'>
                                 <Button color="inherit">Users</Button>
                             </StyledLink>
-                            <StyledLink to='/statistics'>
-                                <Button color="inherit">Staistics</Button>
+                            <StyledLink to='/dashboard'>
+                                <Button color="inherit">Dashboard</Button>
                             </StyledLink>
                             <StyledLink to='/chat'>
                                 <Button color="inherit">Chat</Button>

@@ -21,3 +21,17 @@ export const generateNumbers = async (betAmount : number, Bearer : string) =>{
         return e.response;
     }
 }
+
+
+export const getJackpot = async () =>{
+    try {
+        var response = await axios.get("http://localhost:8080/slots/jackpot");
+        
+        return response.data;
+    }
+    catch (e) {
+       console.error('error in getting jackpot', e);
+        return e.response;
+        
+    }
+}

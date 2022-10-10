@@ -1,14 +1,27 @@
 ﻿import React from 'react';
 
 import SlotMachine from "../../elements/SlotMachine/slotengine";
+import {useNavigate} from "react-router-dom";
+import {useStoreState} from "../../../security/persistenceAuthProvider";
+import HomePage from "../HomePage";
 
 function SlotsPage(props) {
-    return (
-        <div className="slots">
-            <h2>SLOTSMASHINKA</h2>
-            <SlotMachine/>
-        </div>
-    );
+    const navigate = useNavigate();
+    if (useStoreState('authRole') === "PLAYER") {
+        return (
+
+            <div>
+                <SlotMachine/>
+                <br/>
+                <br/>
+            </div>
+
+
+
+        );
+    }else{
+        return ( <HomePage/>)
+    }
 }
 
 export default SlotsPage;
