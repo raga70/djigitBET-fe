@@ -1,5 +1,6 @@
 ﻿import {styled} from "@mui/system";
 import {NavLink} from "react-router-dom";
+
 const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: white;
@@ -17,4 +18,4 @@ const StyledLink = styled(NavLink)`
   
   
 `;
-export default  StyledLink;
+export default StyledLink;

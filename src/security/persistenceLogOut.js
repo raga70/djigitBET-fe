@@ -1,6 +1,4 @@
-﻿
-import {dispatch} from "./persistenceAuthProvider";
-import {Navigate} from "react-router-dom";
+﻿import {dispatch} from "./persistenceAuthProvider";
 
 export const GlobalLogout = () => {
 

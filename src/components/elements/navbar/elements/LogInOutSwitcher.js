@@ -2,29 +2,33 @@
 import {useStoreState} from "../../../../security/persistenceAuthProvider";
 import {NavLink} from "react-router-dom";
 import * as React from "react";
-import {GlobalLogout } from "../../../../security/persistenceLogOut";
+import {GlobalLogout} from "../../../../security/persistenceLogOut";
 
 
+const LogInOutSwitcher = () => {
 
-
-
- const LogInOutSwitcher = () => {
-   
-    if (useStoreState('authToken') === "") { 
+    if (useStoreState('authToken') === "") {
         return (
             <>
-            <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/login'}>Login</NavLink>
-        <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/register'}>Register</NavLink>
+                <NavLink
+                    className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+                    to={'/login'}>Login</NavLink>
+                <NavLink
+                    className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+                    to={'/register'}>Register</NavLink>
             </>
-    )
-    }else {
+        )
+    } else {
         return (
             <>
-            <NavLink className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" to={'/profile'}>Profile</NavLink>
-             <a className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" onClick={GlobalLogout}>Logout</a>
+                <NavLink
+                    className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+                    to={'/profile'}>Profile</NavLink>
+                <a className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+                   onClick={GlobalLogout}>Logout</a>
             </>
-                )
+        )
     }
- }
+}
 
- export default LogInOutSwitcher;
+export default LogInOutSwitcher;

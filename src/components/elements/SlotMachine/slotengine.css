@@ -2,8 +2,8 @@
 body {
     padding: 0;
     margin: 0;
-   
-    
+
+
     font-weight: 800;
     font-style: normal;
 }
@@ -27,13 +27,12 @@ body {
     right: 0;
     margin: auto;
     align-items: center;
-    
+
 }
 
 
-
 .price {
-    
+
     font-weight: 400;
     font-style: normal;
     color: white;
@@ -62,9 +61,15 @@ body {
 }
 
 @keyframes premio {
-    0% {transform: translateY(100px);}
-    80% {transform: translateY(-5px);}
-    100% {transform: translateY(0);}
+    0% {
+        transform: translateY(100px);
+    }
+    80% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .slot {
@@ -84,7 +89,7 @@ body {
 }
 
 .betInput {
-    
+
     font-weight: 400;
     font-style: normal;
     text-align: center;
@@ -118,7 +123,7 @@ body {
 
 .buyMoreButton {
     cursor: pointer;
-    
+
     font-weight: 400;
     font-style: normal;
     text-align: center;
@@ -136,7 +141,7 @@ body {
     margin: 0 5px 0 5px;
     overflow: hidden;
     border: solid 2px #ffd9009c;
-    background: linear-gradient(0deg,  rgb(204, 203, 203)  0%, rgb(255, 255, 255)20%, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 80%, rgb(204, 203, 203) 100%);
+    background: linear-gradient(0deg, rgb(204, 203, 203) 0%, rgb(255, 255, 255) 20%, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 80%, rgb(204, 203, 203) 100%);
 }
 
 .ringMoving {
@@ -156,13 +161,25 @@ body {
 }
 
 @keyframes goaround {
-    0% {transform: translateY(0);}
-    100% {transform: translateY(-1000px);}
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-1000px);
+    }
 }
 
 @keyframes stop {
-    0% {transform: translateY(0)}
-    50% {transform: translateY(-90px)}
-    75% {transform: translateY(-80px)}
-    100% {transform: translateY(-85px)}
+    0% {
+        transform: translateY(0)
+    }
+    50% {
+        transform: translateY(-90px)
+    }
+    75% {
+        transform: translateY(-80px)
+    }
+    100% {
+        transform: translateY(-85px)
+    }
 }

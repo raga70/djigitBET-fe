@@ -1,8 +1,5 @@
-﻿import {useStoreState} from "./security/persistenceAuthProvider";
-import {createGlobalState} from "react-hooks-global-state";
-
-
-export  const BaseUrl = 'http://localhost:8080';
+﻿export const stripePUBLIC_KEY = "pk_test_51LrmbpHE3EgQ6kfoD18LjoslFX0HOCjiV6EuVauiCXOuSny6tMTLvhNMe89u6h08i51lomnhgKZcwH7g1tL12RgY008963BpGE"
+export const BaseUrl = 'http://localhost:8080';
 
 export const LoginUrl = BaseUrl + '/authenticate/login';
 export const RegisterUrl = BaseUrl + '/authenticate/register';
@@ -13,8 +10,10 @@ export const slotsUrl = BaseUrl + '/slots';
 export const StatisticsUrl = BaseUrl + '/statistics';
 
 export function axiosAuthConfig(Bearer) {
-   if (Bearer === undefined || Bearer === null|| Bearer === "") {throw new Error('Bearer token wasnt passed to axios config creator');}
-   
+    if (Bearer === undefined || Bearer === null || Bearer === "") {
+        throw new Error('Bearer token wasnt passed to axios config creator');
+    }
+
     return {
         headers: {
             Authorization: `Bearer ${Bearer}`

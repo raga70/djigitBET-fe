@@ -1,6 +1,5 @@
 ﻿import {useNavigate} from "react-router-dom";
 import {useStoreState} from "../../../security/persistenceAuthProvider";
-import AllUsers from "../../elements/AccountManengment/AllUsers";
 import HomePage from "../HomePage";
 import * as React from "react";
 import DashboardWidgets from "../../elements/Dashboard/DashboardWidgets";
@@ -17,9 +16,8 @@ export default function DashboardPage() {
             </div>
 
 
-
         );
-    }else{
-        return ( <HomePage/>)
+    } else {
+        return (<HomePage/>)
     }
 }

@@ -1,15 +1,10 @@
-﻿import React, {useContext, useEffect, useState} from 'react'
-import {Grid, Paper, Avatar, TextField, Button, Typography, Link, Hidden} from '@mui/material'
+﻿import React, {useEffect, useState} from 'react'
+import {Avatar, Button, Grid, Paper, TextField, Typography} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import axios from 'axios';
-import {BaseUrl, LoginUrl} from "../../app.properties";
-import {dispatch, useStoreState} from "../../security/persistenceAuthProvider";
-import {setGlobalState} from "../../security/persistenceLogOut";
-
-
+import {LoginUrl} from "../../app.properties";
+import {dispatch} from "../../security/persistenceAuthProvider";
 
 
 function showForgotPass() {
@@ -18,32 +13,29 @@ function showForgotPass() {
 }
 
 
+const Login = () => {
 
-
-const Login=()=>{
-    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
 
-    
-    const paperStyle={padding :20,height:'70vh',width:380, margin:"20px auto"}
-    const avatarStyle={backgroundColor:'#1bbd7e'}
-    const btnstyle={margin:'8px 0'}
+    const paperStyle = {padding: 20, height: '70vh', width: 380, margin: "20px auto"}
+    const avatarStyle = {backgroundColor: '#1bbd7e'}
+    const btnstyle = {margin: '8px 0'}
     const navigate = useNavigate();
 
 
-var debug ;
-var accessToken;
-var role ;
+    var debug;
+    var accessToken;
+    var role;
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
-            const response = await axios.post(`${LoginUrl}`, {username, password  }).then((response) => {
-                 accessToken = response.headers?.authorization ;  
-                 role = response.headers?.role;
+            const response = await axios.post(`${LoginUrl}`, {username, password}).then((response) => {
+                    accessToken = response.headers?.authorization;
+                    role = response.headers?.role;
 
                     dispatch({
                         authToken: response.headers?.authorization,
@@ -57,53 +49,45 @@ var role ;
                         user: response.data,
                         type: 'setUser',
                     });
-                   
-                   if (response.status === 200) {
-                    navigate('/');
+
+                    if (response.status === 200) {
+                        navigate('/');
+                    }
+
                 }
-                 
-            }
-            
             );
-         
+
             setUsername('');
             setPassword('');
-            
+
         } catch (e) {
             if (e.response.status === 400 || e.response.status === 0) {
                 setErrMsg('Invalid username or/and password');
             } else if (e.response.status === 401) {
                 setErrMsg('Unauthorized');
-            } else {console.log(err);
+            } else {
+                console.log(err);
                 setErrMsg('Something went wrong');
             }
         }
-           
-           
-          
-        
+
+
     }
 
 
     useEffect(() => {
-        setErrMsg('') ;
-        
+        setErrMsg('');
+
     }, [username, password])
-    
-    
-    
-    
-    
-    
-    
-    
-    return(
+
+
+    return (
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                     <h2>Sign In</h2>
-                    <h1 style={{color:"red"}}>{errMsg}</h1>
+                    <h1 style={{color: "red"}}>{errMsg}</h1>
                 </Grid>
                 <TextField label='Username' onChange={(e) => setUsername(e.target.value)}
                            value={username} placeholder='Enter username' fullWidth required/>
@@ -111,19 +95,20 @@ var role ;
                 <br/>
                 <TextField label='Password' onChange={(e) => setPassword(e.target.value)}
                            value={password} placeholder='Enter password' type='password' fullWidth required/>
-                
-                <Button type='submit' onClick={handleSubmit} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
-                <Typography >
-                    <Button onClick={showForgotPass} >
+
+                <Button type='submit' onClick={handleSubmit} color='primary' variant="contained" style={btnstyle}
+                        fullWidth>Sign in</Button>
+                <Typography>
+                    <Button onClick={showForgotPass}>
                         Forgot password ?
                     </Button>
-                    <div className={"hdn"} style={{display:"none"}}>
+                    <div className={"hdn"} style={{display: "none"}}>
                         The Casino does NOT return money, bye 😉 !
                         <br/>
                         <br/>
                     </div>
                 </Typography>
-                <Typography > Do you have an account ?
+                <Typography> Do you have an account ?
                     <NavLink to={'/register'}>
                         Sign Up
                     </NavLink>

@@ -11,21 +11,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import CasinoIcon from '@mui/icons-material/Casino';
-import {NavLink} from "react-router-dom";
 import StyledLink from "./elements/StyledLink";
 import LogInOutSwitcher from "./elements/LogInOutSwitcher";
 import PlayerResponceDTO from "../../DTO/PlayerResponceDTO";
 import {useStoreState} from "../../../security/persistenceAuthProvider";
-import {Person} from "@mui/icons-material";
 
 
 const pages = ['SLOTS', 'FUNDING', 'DASHBOARD'];
-const settings = ['Profile' , 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 const AdminAppBar = () => {
-    let UserFromLocalst : PlayerResponceDTO = useStoreState('user');
+    let UserFromLocalst: PlayerResponceDTO = useStoreState('user');
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -48,7 +45,7 @@ const AdminAppBar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <CasinoIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <CasinoIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                     <Typography
                         variant="h6"
                         noWrap
@@ -56,7 +53,7 @@ const AdminAppBar = () => {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: {xs: 'none', md: 'flex'},
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -67,7 +64,7 @@ const AdminAppBar = () => {
                         djigitBET
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -76,7 +73,7 @@ const AdminAppBar = () => {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -93,7 +90,7 @@ const AdminAppBar = () => {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {xs: 'block', md: 'none'},
                             }}
                         >
                             {pages.map((page) => (
@@ -103,7 +100,7 @@ const AdminAppBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <CasinoIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <CasinoIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                     <Typography
                         variant="h5"
                         noWrap
@@ -111,7 +108,7 @@ const AdminAppBar = () => {
                         href=""
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: {xs: 'flex', md: 'none'},
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
@@ -122,7 +119,7 @@ const AdminAppBar = () => {
                     >
                         djigitBET
                     </Typography>
-                    <Box sx={{ flexGrow: 1,   }}>
+                    <Box sx={{flexGrow: 1,}}>
                         <Toolbar>
 
                             <StyledLink to='/users'>
@@ -134,21 +131,19 @@ const AdminAppBar = () => {
                             <StyledLink to='/chat'>
                                 <Button color="inherit">Chat</Button>
                             </StyledLink>
-                          
-                            
-                            
-                       
+
+
                         </Toolbar>
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt={UserFromLocalst.name} src="/static/images/avatar/2.jpg" />
+                            <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                                <Avatar alt={UserFromLocalst.name} src="/static/images/avatar/2.jpg"/>
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px' }}
+                            sx={{mt: '45px'}}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -163,8 +158,8 @@ const AdminAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            
-                                     <LogInOutSwitcher/>
+
+                            <LogInOutSwitcher/>
 
                         </Menu>
                     </Box>
