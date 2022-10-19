@@ -3,7 +3,7 @@ import {Avatar, Button, Grid, Paper, TextField, Typography} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from 'axios';
-import {LoginUrl} from "../../app.properties";
+import {axiosAuthConfig, LoginUrl} from "../../app.properties";
 import {dispatch} from "../../security/persistenceAuthProvider";
 
 
@@ -31,7 +31,7 @@ const Login = () => {
     var role;
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         try {
             const response = await axios.post(`${LoginUrl}`, {username, password}).then((response) => {
                     accessToken = response.headers?.authorization;
