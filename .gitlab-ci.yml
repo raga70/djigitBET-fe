@@ -2,11 +2,11 @@ build_dc_image:
   image: docker:20.10.16
   services:
     - docker:dind
-  variables: 
+  variables:
     DOCKER_TLS_CERTDIR: "/certs"
   before_script:
     - echo "Zzax9js2Erfevvv" | docker login --username raga70 --password-stdin
-   # - docker login -u raga70 -p Zzax9js2Erfevvv # i am supper against exposing my login credentials like that but the fontys gitlab server doesnt allow masking variables 
-  script: 
+   # - docker login -u raga70 -p Zzax9js2Erfevvv # i am supper against exposing my login credentials like that but the fontys gitlab server doesnt allow masking variables
+  script:
     - docker build -t raga70/djigitbetfe:latest .
     - docker push raga70/djigitbetfe:latest
