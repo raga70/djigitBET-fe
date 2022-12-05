@@ -61,7 +61,7 @@ const Login = () => {
             setPassword('');
 
         } catch (e) {
-            if (e.response.status === 400 || e.response.status === 0) {
+            if (e.response.status === 400 || e.response.status === 0 || e.response.status === 500) {
                 setErrMsg('Invalid username or/and password');
             } else if (e.response.status === 401) {
                 setErrMsg('Unauthorized');

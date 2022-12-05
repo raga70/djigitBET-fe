@@ -10,6 +10,7 @@ import NavBar from "./components/elements/navbar/NavBarMaster";
 import Profile from "./components/Pages/Profile";
 import DashboardPage from "./components/Pages/Admin/DashboardPage";
 import FundingPage from "./components/Pages/Player/FundingPage";
+import GroupChatPage from "./components/Chat/GroupChatPage";
 
 function App() {
     
@@ -29,6 +30,7 @@ function App() {
                     <Route exact path="/profile" element={<Profile/>}/>
                     <Route exact path="/dashboard" element={<DashboardPage/>}/>
                     <Route exact path="/funding" element={<FundingPage/>}/>
+                    <Route exact path="/chat" element={<GroupChatPage/>}/>
 
                 </Switch>
 

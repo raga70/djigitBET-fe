@@ -120,11 +120,11 @@ const Signup = () => {
                     <br/>
                     <br/>
 
-                    <TextField fullWidth label='Password' required={true} placeholder="Enter your password"
+                    <TextField fullWidth label='Password' type="password" required={true} placeholder="Enter your password"
                                value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <br/>
                     <br/>
-                    <TextField fullWidth label='Confirm Password' required={true} placeholder="Confirm your password"
+                    <TextField fullWidth label='Confirm Password'  type="password" required={true} placeholder="Confirm your password"
                                value={password2} onChange={(e) => setPassword2(e.target.value)}/>
                     <div className={"passmsm"} style={{display: "none"}}>
                         <p style={{color: "red"}}>Passwords do not match</p>

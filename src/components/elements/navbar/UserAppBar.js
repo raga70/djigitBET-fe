@@ -127,10 +127,10 @@ const UserAppBar = () => {
                             <StyledLink to='/funding'>
                                 <Button color="inherit">Funding</Button>
                             </StyledLink>
-                            <StyledLink to='/Dashboard'>
-                                <Button color="inherit">Dashboard</Button>
+                            <StyledLink to='/chat'>
+                                <Button color="inherit">Chat</Button>
                             </StyledLink>
-
+                    
 
                         </Toolbar>
                     </Box>
