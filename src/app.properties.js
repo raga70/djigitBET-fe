@@ -4,7 +4,7 @@ export const stripePUBLIC_KEY = "pk_test_51LrmbpHE3EgQ6kfoD18LjoslFX0HOCjiV6EuVa
 //export const BaseUrl = 'http://localhost:8080';
 
 //dockerCompose
- export const BaseUrl = 'http://10.56.1.2:8080';
+ export const BaseUrl = 'http://20.203.252.102:8080';
 
 export const LoginUrl = BaseUrl + '/authenticate/login';
 export const RegisterUrl = BaseUrl + '/authenticate/register';
