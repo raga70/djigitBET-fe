@@ -42,7 +42,7 @@ export default function GroupChatPage() {
     
     
     const connect =()=>{
-        var socket = new SockJs('http://localhost:8080/ws');
+        var socket = new SockJs(BaseUrl+'/ws');
         stompClient = over(socket);
         stompClient.connect({},onConnected, onError);
     }

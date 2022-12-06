@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import {axiosAuthConfig, slotsUrl} from "../../../app.properties";
+import {axiosAuthConfig, BaseUrl, slotsUrl} from "../../../app.properties";
 import {GlobalLogout} from "../../../security/persistenceLogOut";
 import {Navigate} from "react-router-dom";
 
@@ -22,7 +22,7 @@ export const generateNumbers = async (betAmount: number, Bearer: string) => {
 
 export const getJackpot = async () => {
     try {
-        var response = await axios.get("http://localhost:8080/slots/jackpot");
+        var response = await axios.get(BaseUrl+"/slots/jackpot");
 
         return response.data;
     } catch (e) {

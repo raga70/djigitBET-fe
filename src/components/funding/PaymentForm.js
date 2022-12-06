@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import {axiosAuthConfig, stripePUBLIC_KEY} from "../../app.properties";
+import {axiosAuthConfig, BaseUrl, stripePUBLIC_KEY} from "../../app.properties";
 import {dispatch, useStoreState} from "../../security/persistenceAuthProvider";
 import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
@@ -42,7 +42,7 @@ export default function PaymentForm(props) {
 
         let paymentt: paymentDTO = {id: token.id, amount: amount}
 
-        await axios.post("http://localhost:8080/payment/", paymentt, axiosAuthConfig(Bearer)).then((response) => {
+        await axios.post(BaseUrl+"/payment/", paymentt, axiosAuthConfig(Bearer)).then((response) => {
 
             console.log("r.data" + response.data)
 
