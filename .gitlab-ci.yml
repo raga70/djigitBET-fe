@@ -1,4 +1,12 @@
+stages:
+    - builddcimg
+    - deploy
+
+
+
+
 build_dc_image:
+  stage: builddcimg
   image: docker:20.10.16
   services:
     - docker:dind
@@ -10,3 +18,17 @@ build_dc_image:
   script:
     - docker build -t raga70/djigitbetfe:latest .
     - docker push raga70/djigitbetfe:latest
+
+deploy:
+    stage: deploy
+    before_script:
+        - chmod 400 $SSH_KEY
+        - ls -l
+    script: 
+        - ssh -o StrictHostKeyChecking=no -i $SSH_KEY  raga70@20.203.252.102 "
+            cd djgitbet/djigitbet && echo CDintoDjigitbet && git pull && echo PULLEDfromGit &&
+            echo Zzax9js2Erfevvv | sudo docker login --username raga70 --password-stdin &&
+            echo LOGGED IN TO DOCKER &&
+            chmod +x gradlew && sed -i -e 's/\r$//' gradlew && ./gradlew assemble &&
+            sudo docker pull raga70/djigitbetfe:latest &&
+            sudo docker-compose down && sudo  docker-compose up -d --build"
